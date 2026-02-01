@@ -6,31 +6,28 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Soft Marshmallow Font -->
-    <style>
-        @font-face {
-            font-family: 'SoftMarshmallow';
-            src: url('SoftMarshmallow.ttf') format('truetype');
-        }
+    <!-- ✅ Soft Marshmallow via Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Soft+Marshmallow&display=swap" rel="stylesheet">
 
+    <style>
         body {
             margin: 0;
             background: #fde7ef;
-            font-family: 'SoftMarshmallow', system-ui, sans-serif;
+            font-family: 'Soft Marshmallow', system-ui, sans-serif;
         }
 
-        /* CENTER CARD SAFELY ON ALL DEVICES */
+        /* CENTER CARD – MOBILE SAFE */
         .card {
             background: white;
             width: 800px;
             max-width: 92%;
-            margin: 60px auto;        /* centers horizontally + visually */
+            margin: 60px auto;
             padding: 30px;
             border-radius: 30px;
             text-align: center;
 
-            /* subtle shadow */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            /* soft shadow */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
         img {
@@ -58,6 +55,7 @@
             position: absolute;
             cursor: pointer;
             transition: 0.3s ease;
+            font-family: inherit;
         }
 
         #yesBtn {
@@ -96,7 +94,7 @@
 
 <div class="card" id="card">
 
-    <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
+    <img src="Hedwig.png" alt="Cute Owl">
 
     <h1>Will You Be My Valentine? 💖</h1>
 
@@ -116,7 +114,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // NO button runs away (desktop only behaviour is fine)
+    // No button escapes (desktop-friendly)
     noBtn.addEventListener("mouseenter", () => {
         noBtn.style.left = Math.random() * 60 + "%";
         noBtn.style.top = Math.random() * 60 + "px";
