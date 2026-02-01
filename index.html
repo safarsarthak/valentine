@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Will You Be My Valentine? 💖</title>
 
-    <!-- 🔑 REQUIRED FOR MOBILE -->
+    <!-- REQUIRED -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -12,30 +12,17 @@
             margin: 0;
             background: #fde7ef;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-
-            /* 🔴 FIX */
-            min-height: 100svh;      /* mobile-safe viewport */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            /* allow scrolling if needed */
-            overflow-y: auto;
-            padding: 20px;
         }
 
+        /* CENTER USING MARGINS (MOBILE SAFE) */
         .card {
             background: white;
             width: 800px;
-            max-width: 100%;
-            min-height: 70vh;
+            max-width: 92%;
+            margin: 40px auto;   /* 🔑 THIS is the fix */
             padding: 30px;
             border-radius: 30px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
         }
 
@@ -68,7 +55,7 @@
         #yesBtn {
             background: #ff4f8b;
             color: white;
-            left: 30%;
+            left: 25%;
         }
 
         #yesBtn:hover {
@@ -82,11 +69,17 @@
         }
 
         video {
-            max-height: 45vh;
             max-width: 100%;
+            max-height: 60vh;
             border-radius: 20px;
             margin-top: 20px;
             object-fit: contain;
+        }
+
+        .shy {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -104,7 +97,7 @@
         <button id="noBtn">No</button>
     </div>
 
-    <p style="font-size:14px; color:#777;">No seems a bit shy</p>
+    <div class="shy">No seems a bit shy</div>
 
 </div>
 
@@ -113,23 +106,21 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // NO button escapes
-    noBtn.addEventListener("mousemove", () => {
-        const cardRect = card.getBoundingClientRect();
-        const btnRect = noBtn.getBoundingClientRect();
-
-        const maxX = cardRect.width - btnRect.width - 20;
-        const maxY = cardRect.height - btnRect.height - 120;
-
-        noBtn.style.left = Math.random() * maxX + "px";
-        noBtn.style.top = Math.random() * maxY + "px";
+    // NO button escapes (desktop only, touch-safe)
+    noBtn.addEventListener("mouseenter", () => {
+        noBtn.style.left = Math.random() * 60 + "%";
+        noBtn.style.top = Math.random() * 60 + "px";
     });
 
-    // YES button
+    noBtn.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
     yesBtn.addEventListener("click", () => {
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
-            <p>Press play 💖</p>
+            <p>You just made my heart very happy 💖</p>
 
             <video controls playsinline>
                 <source src="Cute.mp4" type="video/mp4">
