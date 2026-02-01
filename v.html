@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Will You Be My Valentine? 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #fde7ef; /* very light pink */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .card {
+            background: white;
+            width: 800px;
+            height: 70vh;
+            max-width: 90%;
+            padding: 40px;
+            border-radius: 30px;
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card img {
+            width: 160px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #ff4f8b;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            position: relative;
+            width: 100%;
+            height: 150px;
+        }
+
+        button {
+            border: none;
+            padding: 16px 40px;
+            border-radius: 80px;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        #yesBtn {
+            background: #ff4f8b;
+            color: white;
+            left: 35%;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.25);
+        }
+
+        #noBtn {
+            background: #e0e0e0;
+            color: black;
+            left: 55%;
+        }
+
+        .shy-text {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+    <!-- Cute Owl with Sunflower -->
+    <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
+
+    <h1>Will You Be My Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <div class="shy-text">No seems a bit shy</div>
+
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const card = document.getElementById("card");
+
+    // Make NO button run away forever
+    noBtn.addEventListener("mousemove", () => {
+        const cardRect = card.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+
+        const maxX = cardRect.width - btnRect.width - 40;
+        const maxY = cardRect.height - btnRect.height - 200;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    });
+
+    // Extra safety: NO is never clickable
+    noBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    // YES button action
+    yesBtn.addEventListener("click", () => {
+        card.innerHTML = `
+            <h1>YAYYYY!!! 💃🎉</h1>
+            <p style="font-size:18px;">You just made my heart very happy 💖</p>
+            <video autoplay loop controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+        `;
+    });
+</script>
+
+</body>
+</html>
