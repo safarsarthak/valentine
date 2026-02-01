@@ -7,19 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* ✅ LOAD SOFT MARSHMALLOW (WOFF) */
+        /* ✅ SAFE FONT LOADING (RELATIVE PATH) */
         @font-face {
             font-family: 'SoftMarshmallow';
-            src: url('/Valentine/SoftMarshmallow.woff') format('woff');
+            src: url('./SoftMarshmallow.woff') format('woff');
             font-weight: normal;
             font-style: normal;
-            font-display: block;
+            font-display: swap;
         }
 
-        /* FORCE FONT EVERYWHERE */
-        * {
+        /* Apply font everywhere safely */
+        body, button, h1, p {
             font-family: 'SoftMarshmallow', Arial, sans-serif;
-            box-sizing: border-box;
         }
 
         body {
@@ -27,7 +26,7 @@
             background: #fde7ef;
         }
 
-        /* CENTER CARD SAFELY (MOBILE + DESKTOP) */
+        /* Center card safely on all devices */
         .card {
             background: white;
             width: 800px;
@@ -114,7 +113,7 @@
     </div>
 
     <div class="naughty-text">
-        Oh come on… why would you even *think* of pressing No? 😏
+        Oh come on… why would you even <em>think</em> of pressing No? 😏
     </div>
 
 </div>
@@ -124,7 +123,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // No button escapes (desktop-safe)
+    // No button escapes (desktop-friendly)
     noBtn.addEventListener("mouseenter", () => {
         noBtn.style.left = Math.random() * 60 + "%";
         noBtn.style.top = Math.random() * 60 + "px";
