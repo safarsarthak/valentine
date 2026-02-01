@@ -31,7 +31,7 @@
             text-align: center;
         }
 
-        .card img {
+        img {
             width: 160px;
             margin-bottom: 20px;
         }
@@ -55,7 +55,6 @@
             cursor: pointer;
             position: absolute;
             transition: all 0.3s ease;
-            user-select: none;
         }
 
         #yesBtn {
@@ -95,8 +94,7 @@
 
 <div class="card" id="card">
 
-    <!-- Cute Owl -->
-    <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
+    <img src="Hedwig.png" alt="Cute Owl">
 
     <h1>Will You Be My Valentine? 💖</h1>
 
@@ -114,35 +112,21 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // NO button always escapes
     noBtn.addEventListener("mousemove", () => {
-        const cardRect = card.getBoundingClientRect();
-        const btnRect = noBtn.getBoundingClientRect();
-
-        const maxX = cardRect.width - btnRect.width - 40;
-        const maxY = cardRect.height - btnRect.height - 200;
-
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
+        const maxX = 500;
+        const maxY = 100;
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
     });
 
-    noBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-    });
-
-    // YES button action
     yesBtn.addEventListener("click", () => {
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
-            <p style="font-size:18px;">You just made my heart very happy 💖</p>
+            <p style="font-size:18px;">Click play 💖</p>
 
             <iframe 
-                src="https://www.youtube.com/embed/gxR-xbOO44A?autoplay=1&rel=0"
-                allow="autoplay; encrypted-media"
+                src="https://www.youtube.com/embed/gxR-xbOO44A?rel=0"
+                allow="encrypted-media"
                 allowfullscreen>
             </iframe>
         `;
