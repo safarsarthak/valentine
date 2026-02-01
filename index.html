@@ -4,45 +4,36 @@
     <meta charset="UTF-8">
     <title>Will You Be My Valentine? 💖</title>
 
+    <!-- REQUIRED -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
             margin: 0;
             background: #fde7ef;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* FULL PAGE WRAPPER (SAFE CENTERING) */
-        .page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
+        /* CENTER USING MARGINS (MOBILE SAFE) */
         .card {
             background: white;
             width: 800px;
             max-width: 92%;
+            margin: 40px auto;   /* 🔑 THIS is the fix */
             padding: 30px;
             border-radius: 30px;
-            text-align: center;
 
-            /* soft shadow */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            text-align: center;
         }
 
         img {
-            width: 150px;
+            width: 140px;
             margin-bottom: 20px;
         }
 
         h1 {
             color: #ff4f8b;
             margin-bottom: 25px;
-            font-size: 32px;
         }
 
         .buttons {
@@ -53,9 +44,9 @@
 
         button {
             border: none;
-            padding: 14px 38px;
+            padding: 14px 36px;
             border-radius: 80px;
-            font-size: 18px;
+            font-size: 16px;
             position: absolute;
             cursor: pointer;
             transition: 0.3s ease;
@@ -77,12 +68,6 @@
             left: 55%;
         }
 
-        .naughty-text {
-            font-size: 15px;
-            color: #000;
-            margin-top: 12px;
-        }
-
         video {
             max-width: 100%;
             max-height: 60vh;
@@ -90,28 +75,30 @@
             margin-top: 20px;
             object-fit: contain;
         }
+
+        .shy {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
 <body>
 
-<div class="page">
-    <div class="card" id="card">
+<div class="card" id="card">
 
-        <img src="Hedwig.png" alt="Cute Owl">
+    <img src="Hedwig.png" alt="Cute Owl">
 
-        <h1>Will You Be My Valentine? 💖</h1>
+    <h1>Will You Be My Valentine? 💖</h1>
 
-        <div class="buttons">
-            <button id="yesBtn">Yes 💕</button>
-            <button id="noBtn">No</button>
-        </div>
-
-        <div class="naughty-text">
-            Oh come on… why would you even <em>think</em> of pressing No? 😏
-        </div>
-
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No</button>
     </div>
+
+    <div class="shy">No seems a bit shy</div>
+
 </div>
 
 <script>
@@ -119,31 +106,25 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // No button escapes (desktop)
+    // NO button escapes (desktop only, touch-safe)
     noBtn.addEventListener("mouseenter", () => {
         noBtn.style.left = Math.random() * 60 + "%";
         noBtn.style.top = Math.random() * 60 + "px";
     });
 
-    noBtn.addEventListener("click", (e) => {
+    noBtn.addEventListener("click", e => {
         e.preventDefault();
         e.stopPropagation();
     });
 
-    // Yes button → autoplay muted (mobile-safe)
     yesBtn.addEventListener("click", () => {
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
             <p>You just made my heart very happy 💖</p>
 
-            <video autoplay muted controls playsinline>
+            <video controls playsinline>
                 <source src="Cute.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
-
-            <p style="font-size:14px; margin-top:8px;">
-                (Tap 🔊 to unmute)
-            </p>
         `;
     });
 </script>
