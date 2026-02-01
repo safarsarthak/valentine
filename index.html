@@ -8,7 +8,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: #fde7ef; /* very light pink */
+            background: #fde7ef;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -80,11 +80,13 @@
             margin-top: 10px;
         }
 
-        video {
+        iframe {
             width: 100%;
             max-width: 600px;
+            height: 340px;
             border-radius: 20px;
             margin-top: 20px;
+            border: none;
         }
     </style>
 </head>
@@ -93,7 +95,7 @@
 
 <div class="card" id="card">
 
-    <!-- Cute Owl with Sunflower -->
+    <!-- Cute Owl -->
     <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
 
     <h1>Will You Be My Valentine? 💖</h1>
@@ -112,7 +114,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // Make NO button run away forever
+    // NO button always escapes
     noBtn.addEventListener("mousemove", () => {
         const cardRect = card.getBoundingClientRect();
         const btnRect = noBtn.getBoundingClientRect();
@@ -127,7 +129,6 @@
         noBtn.style.top = `${y}px`;
     });
 
-    // Extra safety: NO is never clickable
     noBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -138,7 +139,8 @@
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
             <p style="font-size:18px;">You just made my heart very happy 💖</p>
-             <iframe 
+
+            <iframe 
                 src="https://www.youtube.com/embed/gxR-xbOO44A?autoplay=1&rel=0"
                 allow="autoplay; encrypted-media"
                 allowfullscreen>
