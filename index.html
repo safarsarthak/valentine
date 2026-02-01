@@ -111,4 +111,33 @@
 
 </div>
 
-<scr
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const card = document.getElementById("card");
+
+    // NO button runs away (desktop only behaviour is fine)
+    noBtn.addEventListener("mouseenter", () => {
+        noBtn.style.left = Math.random() * 60 + "%";
+        noBtn.style.top = Math.random() * 60 + "px";
+    });
+
+    noBtn.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    yesBtn.addEventListener("click", () => {
+        card.innerHTML = `
+            <h1>YAYYYY!!! 💃🎉</h1>
+            <p>You just made my heart very happy 💖</p>
+
+            <video controls playsinline>
+                <source src="Cute.mp4" type="video/mp4">
+            </video>
+        `;
+    });
+</script>
+
+</body>
+</html>
