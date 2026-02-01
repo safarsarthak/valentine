@@ -7,26 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* ✅ SAFE FONT LOADING (RELATIVE PATH) */
-        @font-face {
-            font-family: 'SoftMarshmallow';
-            src: url('./SoftMarshmallow.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Apply font everywhere safely */
-        body, button, h1, p {
-            font-family: 'SoftMarshmallow', Arial, sans-serif;
-        }
-
         body {
             margin: 0;
             background: #fde7ef;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
         }
 
-        /* Center card safely on all devices */
+        /* Center card safely */
         .card {
             background: white;
             width: 800px;
@@ -36,7 +23,7 @@
             border-radius: 30px;
             text-align: center;
 
-            /* very light shadow */
+            /* light shadow */
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
@@ -123,17 +110,18 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // No button escapes (desktop-friendly)
+    // No button escapes (desktop behavior)
     noBtn.addEventListener("mouseenter", () => {
         noBtn.style.left = Math.random() * 60 + "%";
         noBtn.style.top = Math.random() * 60 + "px";
     });
 
-    noBtn.addEventListener("click", e => {
+    noBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
     });
 
+    // Yes button action
     yesBtn.addEventListener("click", () => {
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
@@ -141,6 +129,7 @@
 
             <video controls playsinline>
                 <source src="Cute.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         `;
     });
