@@ -6,31 +6,28 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Soft Marshmallow Font -->
     <style>
-        @font-face {
-            font-family: 'SoftMarshmallow';
-            src: url('SoftMarshmallow.ttf') format('truetype');
-        }
-
         body {
             margin: 0;
             background: #fde7ef;
-            font-family: 'SoftMarshmallow', system-ui, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* CENTER CARD SAFELY ON ALL DEVICES */
+        /* FULL PAGE WRAPPER – TRUE CENTERING */
+        .page {
+            min-height: 100svh;          /* mobile-safe viewport */
+            display: grid;
+            place-items: center;         /* vertical + horizontal center */
+            padding: 24px;
+        }
+
         .card {
             background: white;
-            width: 800px;
-            max-width: 92%;
-            margin: 60px auto;        /* centers horizontally + visually */
+            width: 100%;
+            max-width: 800px;
             padding: 30px;
             border-radius: 30px;
             text-align: center;
-
-            /* subtle shadow */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         img {
@@ -77,9 +74,9 @@
         }
 
         .naughty-text {
-            font-size: 15px;
+            font-size: 14px;
             color: #000;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         video {
@@ -94,21 +91,23 @@
 
 <body>
 
-<div class="card" id="card">
+<div class="page">
+    <div class="card" id="card">
 
-    <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
+        <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
 
-    <h1>Will You Be My Valentine? 💖</h1>
+        <h1>Will You Be My Valentine? 💖</h1>
 
-    <div class="buttons">
-        <button id="yesBtn">Yes 💕</button>
-        <button id="noBtn">No</button>
+        <div class="buttons">
+            <button id="yesBtn">Yes 💕</button>
+            <button id="noBtn">No</button>
+        </div>
+
+        <div class="naughty-text">
+            Oh come on… why would you even <em>think</em> of pressing No?
+        </div>
+
     </div>
-
-    <div class="naughty-text">
-        Oh come on… why would you even *think* of pressing No? 😏
-    </div>
-
 </div>
 
 <script>
@@ -116,7 +115,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // NO button runs away (desktop only behaviour is fine)
+    // NO button escapes (desktop)
     noBtn.addEventListener("mouseenter", () => {
         noBtn.style.left = Math.random() * 60 + "%";
         noBtn.style.top = Math.random() * 60 + "px";
@@ -127,14 +126,23 @@
         e.stopPropagation();
     });
 
+    // YES button → smart autoplay
     yesBtn.addEventListener("click", () => {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
             <p>You just made my heart very happy 💖</p>
 
-            <video controls playsinline>
+            <video 
+                autoplay 
+                ${isMobile ? 'muted' : ''} 
+                controls 
+                playsinline>
                 <source src="Cute.mp4" type="video/mp4">
             </video>
+
+            ${isMobile ? '<p style="font-size:13px;">Tap 🔊 to unmute</p>' : ''}
         `;
     });
 </script>
