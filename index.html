@@ -6,33 +6,35 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Soft Marshmallow Font -->
     <style>
+        @font-face {
+            font-family: 'SoftMarshmallow';
+            src: url('SoftMarshmallow.ttf') format('truetype');
+        }
+
         body {
             margin: 0;
             background: #fde7ef;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'SoftMarshmallow', system-ui, sans-serif;
         }
 
-        /* PAGE WRAPPER = equal space from all sides */
-        .page {
-            min-height: 100svh;              /* mobile-safe viewport */
-            padding: 24px;                   /* equal margin on all sides */
-            display: grid;
-            place-items: center;             /* true centering */
-        }
-
-        /* CARD auto-sizes */
+        /* CENTER CARD SAFELY ON ALL DEVICES */
         .card {
             background: white;
-            width: 100%;
-            max-width: 800px;                /* caps size on desktop */
+            width: 800px;
+            max-width: 92%;
+            margin: 60px auto;        /* centers horizontally + visually */
             padding: 30px;
             border-radius: 30px;
             text-align: center;
+
+            /* subtle shadow */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         img {
-            width: 140px;
+            width: 150px;
             margin-bottom: 20px;
         }
 
@@ -50,9 +52,9 @@
 
         button {
             border: none;
-            padding: 14px 36px;
+            padding: 14px 38px;
             border-radius: 80px;
-            font-size: 16px;
+            font-size: 18px;
             position: absolute;
             cursor: pointer;
             transition: 0.3s ease;
@@ -75,9 +77,9 @@
         }
 
         .naughty-text {
-            font-size: 14px;
+            font-size: 15px;
             color: #000;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         video {
@@ -92,23 +94,19 @@
 
 <body>
 
-<div class="page">
+<div class="card" id="card">
 
-    <div class="card" id="card">
+    <img src="Hedwig.png" alt="Cute Owl Holding Sunflower">
 
-        <img src="Hedwig.png" alt="Cute Owl">
+    <h1>Will You Be My Valentine? 💖</h1>
 
-        <h1>Will You Be My Valentine? 💖</h1>
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No</button>
+    </div>
 
-        <div class="buttons">
-            <button id="yesBtn">Yes 💕</button>
-            <button id="noBtn">No</button>
-        </div>
-
-        <div class="naughty-text">
-            Oh come on… why would you even <em>think</em> of pressing No? 😏
-        </div>
-
+    <div class="naughty-text">
+        Oh come on… why would you even *think* of pressing No? 😏
     </div>
 
 </div>
@@ -118,7 +116,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const card = document.getElementById("card");
 
-    // NO button escapes (desktop-friendly)
+    // NO button runs away (desktop only behaviour is fine)
     noBtn.addEventListener("mouseenter", () => {
         noBtn.style.left = Math.random() * 60 + "%";
         noBtn.style.top = Math.random() * 60 + "px";
@@ -130,17 +128,13 @@
     });
 
     yesBtn.addEventListener("click", () => {
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
         card.innerHTML = `
             <h1>YAYYYY!!! 💃🎉</h1>
             <p>You just made my heart very happy 💖</p>
 
-            <video autoplay ${isMobile ? 'muted' : ''} controls playsinline>
+            <video controls playsinline>
                 <source src="Cute.mp4" type="video/mp4">
             </video>
-
-            ${isMobile ? '<p style="font-size:13px;">Tap 🔊 to unmute</p>' : ''}
         `;
     });
 </script>
